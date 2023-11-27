@@ -5,13 +5,6 @@ import { Deduction, Overtime } from 'types';
 
 type Props = {};
 export const Salary = (props: Props) => {
-  const salaryHour = (salary: number) => {
-    return salary / 176;
-  };
-
-  const salaryFool = (salary: number, allowances: number, deductions: number) =>
-    salary + allowances - deductions;
-
   const columns = [
     {
       title: 'должность',

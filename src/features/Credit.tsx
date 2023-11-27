@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Select, Row, Col, Table, InputNumber, Button } from 'antd';
+import { Line } from '@ant-design/charts';
+import { Pie, DualAxes, Column } from '@ant-design/plots';
 
 export const Credit = () => {
   const [amount, setAmount] = useState<string>('');
   const [term, setTerm] = useState<number>(1);
-  const [payment, setPayment] = useState<number>();
+
   const [paymentMonthly, setPaymentMonthly] = useState<
     {
       month: number;
@@ -88,11 +90,11 @@ export const Credit = () => {
       // Добавляем данные о текущем месяце в массив графика выплат.
       paymentSchedule.push({
         month: i,
-        sold_credit: amountNumber,
-        interest_rate: interest,
-        monthly_rate: monthlyPaymentAmount,
+        sold_credit: Number(amountNumber.toFixed(2)),
+        interest_rate: Number(interest.toFixed(2)),
+        monthly_rate: Number(monthlyPaymentAmount.toFixed(2)),
         commission: 0,
-        monthly_payment: monthlyPayment,
+        monthly_payment: Number(monthlyPayment.toFixed(2)),
       });
 
       // Уменьшаем сумму кредита на размер ежемесячного платежа.
@@ -106,6 +108,18 @@ export const Credit = () => {
     const paymentSchedule = getCreditPayment(amount, term);
 
     setPaymentMonthly(paymentSchedule);
+  };
+
+  const config = {
+    data: paymentMonthly,
+    // padding: 'auto',
+    xField: 'month',
+    yField: 'interest_rate',
+    xAxis: {
+      // type: 'timeCat',
+      tickCount: 5,
+    },
+    smooth: true,
   };
 
   return (
@@ -142,7 +156,19 @@ export const Credit = () => {
         <Col span={3}>
           <Button onClick={handlePeriodChange}>вычислить</Button>
         </Col>
+      </Row>
 
+      <Row gutter={[16, 16]} style={{ marginTop: 24 }}>
+        {paymentMonthly ? (
+          <Col span={12}>
+            <Column {...config} />
+          </Col>
+        ) : null}
+        {paymentMonthly ? (
+          <Col span={12}>
+            <Line {...config} />
+          </Col>
+        ) : null}
         <Col span={24}>
           <Table dataSource={paymentMonthly} columns={columns} pagination={false} />
         </Col>
