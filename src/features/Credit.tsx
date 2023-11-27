@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Select, Row, Col, Table, InputNumber, Button } from 'antd';
 import { Line } from '@ant-design/charts';
-import { Pie, DualAxes, Column } from '@ant-design/plots';
+import { Column } from '@ant-design/plots';
 
 export const Credit = () => {
   const [amount, setAmount] = useState<string>('');
