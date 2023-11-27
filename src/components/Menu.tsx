@@ -29,24 +29,10 @@ export const Menu = () => {
       onClick: () => navigate('/salary'),
     },
     {
-      key: '/bank',
-      label: 'Bank',
+      key: '/credit',
+      label: 'Credit',
       icon: <MailOutlined />,
-
-      children: [
-        {
-          key: '/credit',
-          label: 'Credit',
-          icon: <MailOutlined />,
-          onClick: () => navigate('/credit'),
-        },
-        {
-          key: '/deposit',
-          label: 'Deposit',
-          icon: <MailOutlined />,
-          onClick: () => navigate('/deposit'),
-        },
-      ],
+      onClick: () => navigate('/credit'),
     },
   ];
 

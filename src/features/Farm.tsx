@@ -1,5 +1,5 @@
 import { Row, Col, Table } from 'antd';
-import { eveningData, farmData } from '../data';
+import { eveningData, farmData } from 'data';
 
 export const Farm = () => {
   const columnsFarm = [
